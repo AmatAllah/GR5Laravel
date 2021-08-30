@@ -4,21 +4,89 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\student;
+
 class userController extends Controller
 {
     //
 
 
 
-  public function Message(){
-      return 'From Controller';
+  public function display(){
+
+    $data = student::get();
+
+    return view('userIndex',['data' => $data]);
   }
+
+
+
 
 
   public function register(){
 
     return view('register');
   }
+
+
+
+
+  public function store(Request $request){
+     
+     
+      // dd(request());    == $request
+    
+   $data =   $this->validate(request(),[
+
+        "name"      => "required",
+        "email"     => "required|email",
+        "password"  => "required|min:6|max:10",
+
+     ]);
+
+        $data['password']   =  bcrypt($request->password);// $data['password'] 
+
+     // logic  
+      $op = student::create($data);
+
+       if($op){
+ 
+        return back();
+
+       }
+
+
+  }
+
+
+
+
+
+
+
+# get method 
+  // public function destroy($id){
+
+  //   // code ..... 
+  //    student::where('id',$id)->delete();
+
+  //    return back();
+  // }
+
+# delete Method
+  public function destroy(Request $request){
+
+    // code ..... 
+    student::where('id',$request->id)->delete();
+   
+    return back();
+  }
+
+
+
+
+
+
 
 
 

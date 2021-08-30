@@ -55,25 +55,8 @@
 
 <?php  
 
-
-
- 
-
-
-
-echo $Message.'<br>';  
-echo $title.'<br>';
-
-
-  foreach ($userNames as $value) {
-      # code..
-      echo '* '.$value.'<br>';
-  }
-
-
-
- 
-
+echo $name.'<br>';  
+echo $email.'<br>';
 
 
 ?>

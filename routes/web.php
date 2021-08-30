@@ -52,12 +52,15 @@ Route::get('/', function () {
 #Call Controller Methods  ... 
 
 
-Route::get('Message','userController@Message');
+Route::get('Students','userController@display');
 
 Route::get('Register','userController@register');
-Route::post('doRegister','userController@saveData');
+Route::post('doRegister','userController@store');
+
 Route::get('Profile','userController@UserData');
 
+//Route::get('destroy/{id}','userController@destroy');
+Route::delete('destroy','userController@destroy');
 
 
 
