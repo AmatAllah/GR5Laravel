@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,26 +22,35 @@
 @endif
 
 
+  {{ session()->get('Message') }}
+<?php 
+   
+  // session()->forget(['Message']);
+   //  session()->flush();  // session_destroy();
+ ?>
+
+
+
 <div class="container">
 <h2>Register</h2>
-<form  method="post"  action="<?php echo url('/doRegister');?>"  enctype ="multipart/form-data">
+<form  method="post"  action="{{ url('/doRegister') }}"  enctype ="multipart/form-data">
 
  <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
 
 <div class="form-group">
 <label for="exampleInputEmail1">Name</label>
-<input type="text"  name="name"  class="form-control" id="exampleInputName" aria-describedby="" placeholder="Enter Name">
+<input type="text"  name="name"   value="{{ old('name') }}" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Enter Name">
 </div>
 
 
 <div class="form-group">
 <label for="exampleInputEmail1">Email address</label>
-<input type="email" name="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+<input type="email" name="email"  value="{{ old('email') }}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 </div>
 
 <div class="form-group">
 <label for="exampleInputPassword1">New Password</label>
-<input type="password"  name="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
+<input type="password"  name="password"  value="{{ old('password') }}"  class="form-control" id="exampleInputPassword1" placeholder="Password">
 </div>
 
 

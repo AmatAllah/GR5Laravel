@@ -17,3 +17,4 @@ class student extends Model
 
 
 }
+// php artisan make:model name 

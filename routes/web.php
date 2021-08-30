@@ -59,6 +59,11 @@ Route::post('doRegister','userController@store');
 
 Route::get('Profile','userController@UserData');
 
+
+Route::get('edit/{id}','userController@edit');
+Route::put('update/{id}','userController@update');
+
+
 //Route::get('destroy/{id}','userController@destroy');
 Route::delete('destroy','userController@destroy');
 

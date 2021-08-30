@@ -49,15 +49,60 @@ class userController extends Controller
      // logic  
       $op = student::create($data);
 
+      $message = '';
        if($op){
- 
+        $message = "Data Inserted";
+       }else{
+         $message = "Error Try Again!!!";
+       }
+
+      //  session()->put('Message',$message);
+
+          session()->flash('Message',$message);
+
         return back();
 
-       }
+       
+     // return redirect(url('/'));
 
 
   }
 
+
+  # get edit Blade .. 
+
+  function edit($id){
+    // logic 
+
+    $data = student::where('id',$id)->get();
+
+    return view('edit',['data' => $data]);
+  }
+
+
+
+   public function update(Request $request,$id){
+
+    // logic ..... 
+
+     $data = $this->validate($request,[
+       
+      "name"  => "required",
+      "email" => "required|email"
+
+     ]);
+
+
+     $op = student::where('id',$id)->update(["name" => $request->name , "email" => $request->email]);
+
+
+     if($op){
+       return back();
+     }
+
+
+
+   }
 
 
 
@@ -155,3 +200,13 @@ class userController extends Controller
 
 
 // php artisan make:controller testController 
+
+
+
+
+
+
+// title 
+// content 
+// startdate
+// endDate  

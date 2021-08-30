@@ -77,7 +77,7 @@
 
             <td>
                  <a href='' data-toggle="modal" data-target="#modal_single_del{{ $key }}"  class='btn btn-danger m-r-1em'>Delete</a>
-                 <a href='edit.php?id=' class='btn btn-primary m-r-1em'>Edit</a>       
+                 <a href='{{ url('/edit/'.$value->id) }}' class='btn btn-primary m-r-1em'>Edit</a>       
                 </td> 
 
            </tr> 
