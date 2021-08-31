@@ -23,20 +23,13 @@
 
 
   {{ session()->get('Message') }}
-<?php 
-   
-  // session()->forget(['Message']);
-   //  session()->flush();  // session_destroy();
- ?>
-
 
 
 <div class="container">
 <h2>Register</h2>
-<form  method="post"  action="{{ url('/doRegister') }}"  enctype ="multipart/form-data">
+<form  method="post"  action="{{ url('/Student') }}"  enctype ="multipart/form-data">
 
- <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
-
+@csrf
 <div class="form-group">
 <label for="exampleInputEmail1">Name</label>
 <input type="text"  name="name"   value="{{ old('name') }}" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Enter Name">

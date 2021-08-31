@@ -50,25 +50,33 @@ Route::get('/', function () {
 
 
 #Call Controller Methods  ... 
-
-
 Route::get('Students','userController@display');
-
 Route::get('Register','userController@register');
 Route::post('doRegister','userController@store');
-
-Route::get('Profile','userController@UserData');
-
-
+// Route::get('Profile','userController@UserData');
 Route::get('edit/{id}','userController@edit');
 Route::put('update/{id}','userController@update');
-
-
 //Route::get('destroy/{id}','userController@destroy');
 Route::delete('destroy','userController@destroy');
 
 
 
+
+Route::resource('Student',"studentController");
+
+
+/*
+Student    [GET]     =     Route::get('Student','studentController@index');
+Student/create [GET] =     Route::get('Student/create','studentController@create');
+Student    [POST]    =     Route::post('Student','studentController@store');
+Student/{id}/edit [GET] =  Route::get('Student/{id}/edit','studentController@edit');
+Student/{id}   [PUT]    =  Route::put('Student/{id}','studentController@update');
+Student/{id}   [DELETE] =  Route::  delete('Student/{id}','studentController@destroy');
+*/
+
+
+
+// Route::resource('Test',"web\testtController");
 
 
 

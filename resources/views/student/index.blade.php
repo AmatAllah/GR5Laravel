@@ -37,19 +37,24 @@
 
         <div class="page-header">
             <h1>Read Users </h1> 
+
+
+            {{ session()->get('Message') }}
+
+
             <br>
 
 
+            <a href="{{ url('/Student/create') }}"> + Add Student</a>
 
   
-     <a href="logout.php">LogOut</a>
+            <a href="logout.php">LogOut</a>
 
             
 
         </div>
 
         <!-- PHP code to read records will be here -->
-
 
 
         <table class='table table-hover table-responsive table-bordered'>
@@ -77,7 +82,7 @@
 
             <td>
                  <a href='' data-toggle="modal" data-target="#modal_single_del{{ $key }}"  class='btn btn-danger m-r-1em'>Delete</a>
-                 <a href='{{ url('/edit/'.$value->id) }}' class='btn btn-primary m-r-1em'>Edit</a>       
+                 <a href='{{ url('/Student/'.$value->id.'/edit') }}' class='btn btn-primary m-r-1em'>Edit</a>       
                 </td> 
 
            </tr> 
@@ -101,7 +106,7 @@
                             Delete  {{ $value->name }} !!!!
                     </div>
                     <div class="modal-footer">
-                        <form action="{{ url('/destroy') }}" method="post">
+                        <form action="{{ url('/Student/'.$value->id) }}" method="post">
                          
                             @method('delete') {{-- <input type="hidden" value="delete" name="_method"> --}}               
                             @csrf    {{-- <input type="hidden" value="{{ csrf_tokken() }}" name="_token"> --}}  
@@ -119,22 +124,15 @@
         </div>
 
 
-
-
-
-
-
            @endforeach
 
        
             <!-- end table -->
-           
         </table>
-
-  
+        {{ $data->links() }}
     </div>
     <!-- end .container -->
-    {{ dd($data->links()) }}
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

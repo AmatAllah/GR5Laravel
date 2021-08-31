@@ -41,8 +41,12 @@ class userController extends Controller
         "name"      => "required",
         "email"     => "required|email",
         "password"  => "required|min:6|max:10",
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
 
      ]);
+
+
 
         $data['password']   =  bcrypt($request->password);// $data['password'] 
 
