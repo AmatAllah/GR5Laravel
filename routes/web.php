@@ -19,6 +19,13 @@ Route::get('/', function () {
 
 
 
+
+
+Route::get('/admin', function () {
+    return view('index');
+});
+
+
 // Route::get('Message/{id?}/{name?}',function($id = null,$name = null){
 
 //      echo 'Welcome To Laravel '.$id.'    | '.$name;
@@ -61,8 +68,16 @@ Route::delete('destroy','userController@destroy');
 
 
 
+//Route::view('Login','login');
+Route::get('Login','studentController@login');
+Route::post('doLogin','studentController@dologin');
+Route::get('LogOut','studentController@logout');
+
+
 
 Route::resource('Student',"studentController");
+//->middleware(['checkAuth']);
+
 
 
 /*

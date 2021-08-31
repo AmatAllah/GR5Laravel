@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Register</title>
+<title>Login</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,18 +23,19 @@
 
 
   {{ session()->get('Message') }}
+<?php 
+   
+  // session()->forget(['Message']);
+   //  session()->flush();  // session_destroy();
+ ?>
+
 
 
 <div class="container">
-<h2>Register</h2>
-<form  method="post"  action="{{ url('/Student') }}"  enctype ="multipart/form-data">
+<h2>Login</h2>
+<form  method="post"  action="{{ url('/doLogin') }}"  enctype ="multipart/form-data">
 
 @csrf
-<div class="form-group">
-<label for="exampleInputEmail1">Name</label>
-<input type="text"  name="name"   value="{{ old('name') }}" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Enter Name">
-</div>
-
 
 <div class="form-group">
 <label for="exampleInputEmail1">Email address</label>
@@ -42,40 +43,21 @@
 </div>
 
 <div class="form-group">
-<label for="exampleInputPassword1">New Password</label>
+<label for="exampleInputPassword1"> Password</label>
 <input type="password"  name="password"  value="{{ old('password') }}"  class="form-control" id="exampleInputPassword1" placeholder="Password">
 </div>
 
 
 
 <div class="form-group">
-    <label for="exampleInputPassword1">Image</label>
-    <input type="file"  name="image"    >
+    <input type="checkbox"  name="rememberMe"   >
+    <label for="exampleInputPassword1"> Remember Me</label>
+
     </div>
 
- 
-
-
-
-{{-- <div class="form-group">
-    <label for="exampleInputPassword1">DOF</label>
-    <input type="date"  name="dof" id="dof"  value="2000-10-12"  class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-     --}}
-
-
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-primary">Login</button>
 </form>
 </div>
-
-{{-- <script>
-
-  $('#dof').click(function(){
-
-        $(this).prop('type','date');
-  });
-
-</script> --}}
 
 </body>
 </html>

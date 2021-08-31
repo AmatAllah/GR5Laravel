@@ -42,13 +42,17 @@
             {{ session()->get('Message') }}
 
 
+         <h3>{{ auth()->user()->name }}</h3>
+
+
+
             <br>
 
 
             <a href="{{ url('/Student/create') }}"> + Add Student</a>
 
   
-            <a href="logout.php">LogOut</a>
+            <a href="{{ url('/LogOut') }}">LogOut</a>
 
             
 
@@ -129,7 +133,7 @@
        
             <!-- end table -->
         </table>
-        {{ $data->links() }}
+        {{ $data->links('pagination.default') }}
     </div>
     <!-- end .container -->
 

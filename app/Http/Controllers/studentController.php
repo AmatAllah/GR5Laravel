@@ -8,6 +8,14 @@ use App\Models\student;
 
 class studentController extends Controller
 {
+
+
+     public function __construct(){
+
+        $this->middleware('checkAuth',['except' => ['create','store','login','doLogin']]);
+     }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +56,19 @@ class studentController extends Controller
        $data = $this->validate($request,[
            "name" => "required",
            "email" => "required|email",
-           "password" => "required|min:6"
+           "password" => "required|min:6",
+           "image"    => "required|image|mimes:png,jpeg,jpg,gif"
        ]);
+
+
+
+     # upload image ... 
+
+     $finalName = time().rand().'.'.$request->image->extension();
+
+//     $request->image->move(public_path('images'),$finalName);
+//     $request->image->storeAs('images',$finalName);
+
 
        $data['password'] = bcrypt($data['password']);
        
@@ -163,6 +182,59 @@ class studentController extends Controller
 
 
     }
+
+
+
+
+   public function login(){
+       return view('login');
+   } 
+
+
+   public function doLogin(Request $request){
+
+    // logic .... 
+
+    $data = $this->validate($request,[
+        
+        "email" => "required|email",
+        "password" => "required|min:6"
+    ]);
+
+    $status = false;
+    if($request->has('rememberMe')){
+     $status = true;
+    }
+
+   
+      if(auth()->attempt($data,$status)){
+
+
+        return redirect(url('/Student'));
+
+      }else{
+
+        session()->flash('Message','Invalid Credentials try again');
+        return redirect(url('/Login'));
+
+      }
+
+    
+
+   }
+
+
+
+   public function logout(){
+
+    auth()->logout();
+
+    return redirect(url('/Login'));
+   }
+
+
+
+
 }
 
 
@@ -172,12 +244,3 @@ class studentController extends Controller
 
 
 
-/*
-
-   Subjects Module    [title,content,startdate,enddate,teacher Name ,code ]
-
-   CRUD SYSTEM ..... 
-
-
-
-*/
