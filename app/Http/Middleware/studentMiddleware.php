@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class checkLogin
+class studentMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,17 +17,13 @@ class checkLogin
      */
     public function handle(Request $request, Closure $next)
     {
-     
-        if(Auth::check()){
 
+        if(Auth::guard('student')->check()){
             return $next($request);
-        }else{
 
-            return redirect(url('/Login'));
+        }else{
+            return redirct(url('/Login'));
         }
 
-    
-    
-    
     }
 }

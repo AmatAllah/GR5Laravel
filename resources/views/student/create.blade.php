@@ -48,6 +48,18 @@
 
 
 
+
+<div class="form-group">
+    <label for="exampleInputPassword1">Department</label>
+ <select name="dep_id" class="form-control">
+     @foreach ($data as  $value )
+         <option value="{{ $value->id }}" >{{ $value->title }}</option>
+     @endforeach
+ </select>   
+
+</div>
+
+
 <div class="form-group">
     <label for="exampleInputPassword1">Image</label>
     <input type="file"  name="image"    >

@@ -36,27 +36,14 @@
  
 
         <div class="page-header">
-            <h1>Read Users </h1> 
-
+            <h1>{{ trans('website.Departments') }}</h1> 
 
             {{ session()->get('Message') }}
 
-
-         <h3>{{ auth('student')->user()->name }}</h3>
-
-
-
-            <br>
-
-
-            <a href="{{ url('/Student/create') }}"> + Add Student</a>
-
-  
-            <a href="{{ url('/LogOut') }}">LogOut</a>
-
-            
-{{app()->getLocale() }}
         </div>
+
+
+     {{app()->setLocale('ar')}}
 
         <!-- PHP code to read records will be here -->
 
@@ -65,13 +52,10 @@
             <!-- creating our table heading -->
             <tr>
                 <th>#</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Department</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-                <th>action</th>            
+                <th>{{ trans('website.id') }}</th>
+                <th>{{ trans('website.title') }}</th>
+                <th>{{ trans('website.ShowUsers') }}</th>
+                <th>{{ trans('website.Updated_at') }}</th>
             </tr>
 
        
@@ -82,17 +66,10 @@
 
              <td>{{ ++$key }}</td>
              <td>{{ $value->id }}</td>
-             <td>{{ $value->name }}</td>
-             <td>{{ $value->email }}</td>
-             {{-- <td>{{ $value->dep_title }}</td> --}}
-             <td>{{ $value->dep_data->title }}</td>
-             <td>{{ $value->created_at }}</td>
+             <td>{{ $value->title }}</td>
+            <td><a href='' data-toggle="modal" data-target="#modal_single_show{{ $key }}"  class='btn btn-primary m-r-1em'>{{ trans('website.show') }}</a>
+           </td>
              <td>{{ $value->updated_at }}</td>
-
-            <td>
-                 <a href='' data-toggle="modal" data-target="#modal_single_del{{ $key }}"  class='btn btn-danger m-r-1em'>Delete</a>
-                 <a href='{{ url('/Student/'.$value->id.'/edit') }}' class='btn btn-primary m-r-1em'>Edit</a>       
-                </td> 
 
            </tr> 
 
@@ -101,32 +78,30 @@
 
 
         
-           <div class="modal" id="modal_single_del{{ $key }}" tabindex="-1" role="dialog">
+           <div class="modal" id="modal_single_show{{ $key }}" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">delete confirmation</h5>
+                        <h5 class="modal-title">Students ..</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
                    </button>
                     </div>
         
                     <div class="modal-body">
-                            Delete  {{ $value->name }} !!!!
-                    </div>
+
+                        @foreach ($value->students as $student )
+                            {{ '* '.$student->name }} <br>
+                        @endforeach
+                    
+                        </div>
                     <div class="modal-footer">
-                        <form action="{{ url('/Student/'.$value->id) }}" method="post">
-                         
-                            @method('delete') {{-- <input type="hidden" value="delete" name="_method"> --}}               
-                            @csrf    {{-- <input type="hidden" value="{{ csrf_tokken() }}" name="_token"> --}}  
-                          
-                            <input type="hidden" value="{{ $value->id }}" name="id">
+               
 
                             <div class="not-empty-record">
-                                <button type="submit" class="btn btn-primary">Delete</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                             </div>
-                        </form>
+                
                     </div>
                 </div>
             </div>
@@ -138,7 +113,6 @@
        
             <!-- end table -->
         </table>
-        {{ $data->links('pagination.default') }}
     </div>
     <!-- end .container -->
 

@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Models\student;
 
+use App\Models\departments;
+
 class studentController extends Controller
 {
 
 
      public function __construct(){
 
-        $this->middleware('checkAuth',['except' => ['create','store','login','doLogin']]);
+         $this->middleware('StudentAuth',['except' => ['create','store','login','doLogin']]);
      }
 
 
@@ -25,7 +27,15 @@ class studentController extends Controller
     {
         //
 
-      $data = student::paginate(5);
+    //   $data = student::select('students.*','departments.title as dep_title')
+    //   ->join('departments','departments.id','=','students.dep_id')   // leftjoin 
+    //   // ->where('students.id',2)    //->where('students.id','!=',2)    
+    //   ->where([ ['students.id',2] ,['students.dep_id',1]  ])
+    //   ->paginate(5);
+
+
+       $data  = student::with('dep_data')->paginate(5);
+
 
       return view('student.index',['data' => $data]);
 
@@ -41,7 +51,10 @@ class studentController extends Controller
     public function create()
     { 
         //
-        return view('student.create');
+
+        $data = departments::get();
+   
+        return view('student.create',['data' => $data]);
     }
 
     /**
@@ -54,10 +67,11 @@ class studentController extends Controller
     {
         //
        $data = $this->validate($request,[
-           "name" => "required",
-           "email" => "required|email",
+           "name"     => "required",
+           "email"    => "required|email",
            "password" => "required|min:6",
-           "image"    => "required|image|mimes:png,jpeg,jpg,gif"
+           "image"    => "required|image|mimes:png,jpeg,jpg,gif",
+           "dep_id"   => "required"
        ]);
 
 
@@ -66,9 +80,13 @@ class studentController extends Controller
 
      $finalName = time().rand().'.'.$request->image->extension();
 
-//     $request->image->move(public_path('images'),$finalName);
+       $request->image->move(public_path('images'),$finalName);
 //     $request->image->storeAs('images',$finalName);
 
+
+
+
+       $data['image'] = $finalName;
 
        $data['password'] = bcrypt($data['password']);
        
@@ -138,7 +156,8 @@ class studentController extends Controller
       
            $op = student::where('id',$id)->update(["name" => $request->name , "email" => $request->email]);
       
-      
+
+
             if($op){
                 $message = "Record Updated";
             }else{
@@ -195,6 +214,7 @@ class studentController extends Controller
 
     // logic .... 
 
+
     $data = $this->validate($request,[
         
         "email" => "required|email",
@@ -207,7 +227,8 @@ class studentController extends Controller
     }
 
    
-      if(auth()->attempt($data,$status)){
+
+      if(auth()->guard('student')->attempt($data,$status)){
 
 
         return redirect(url('/Student'));

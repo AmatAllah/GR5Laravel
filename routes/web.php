@@ -70,14 +70,13 @@ Route::delete('destroy','userController@destroy');
 
 //Route::view('Login','login');
 Route::get('Login','studentController@login');
-Route::post('doLogin','studentController@dologin');
+Route::post('doLogin','studentController@doLogin');
 Route::get('LogOut','studentController@logout');
 
 
 
-Route::resource('Student',"studentController");
-//->middleware(['checkAuth']);
-
+Route::resource('Student',"studentController");//->middleware(['checkAuth']);
+Route::resource('departments','departmentsController');
 
 
 /*
@@ -88,6 +87,9 @@ Student/{id}/edit [GET] =  Route::get('Student/{id}/edit','studentController@edi
 Student/{id}   [PUT]    =  Route::put('Student/{id}','studentController@update');
 Student/{id}   [DELETE] =  Route::  delete('Student/{id}','studentController@destroy');
 */
+
+
+
 
 
 
