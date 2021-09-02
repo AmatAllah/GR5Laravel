@@ -42,8 +42,7 @@
 
         </div>
 
-
-     {{app()->setLocale('ar')}}
+          <a href="{{ url('/Lang/ar') }}">ع</a> || <a href="{{ url('/Lang/en') }}">EN</a> 
 
         <!-- PHP code to read records will be here -->
 

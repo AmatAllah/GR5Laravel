@@ -13,6 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/clearCache',function(){
+
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+
+   dd('Cache Cleared');
+
+});
+
+
+
+
+Route::get('/Migration',function(){
+
+    Artisan::call('migrate:fresh');
+    dd('Migration Run');
+
+});
+
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,6 +48,24 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('index');
 });
+
+
+
+
+Route::get("/Lang/{lang}",function($lang){
+// logic .... 
+
+if($lang == "ar"){
+    session()->put('lang',"ar");
+}else{
+    session()->put('lang',"en");
+
+}
+return back();
+
+});
+
+
 
 
 // Route::get('Message/{id?}/{name?}',function($id = null,$name = null){

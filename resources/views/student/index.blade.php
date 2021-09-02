@@ -36,7 +36,7 @@
  
 
         <div class="page-header">
-            <h1>Read Users </h1> 
+            <h1>{{ trans('website.Rear_Users') }} </h1> 
 
 
             {{ session()->get('Message') }}

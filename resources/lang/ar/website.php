@@ -8,7 +8,8 @@ return [
     "Updated_at"  => "تاريخ التعديل",
     "ShowUsers" => "عرض الطلاب",
     "show"      => "عرض",
-    "Departments" => "ألاقسام "
+    "Departments" => "ألاقسام ",
+    "Rear_Users"  => "عرض الطلاب"
 
     
 ];

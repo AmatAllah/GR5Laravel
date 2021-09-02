@@ -8,7 +8,8 @@ return [
     "Updated_at"  => "Updated At",
     "ShowUsers" => "Show Students",
     "show"      => "Show",
-    "Departments" => "Departments"
+    "Departments" => "Departments",
+    "Rear_Users"  => "List Students"
 
 
 
